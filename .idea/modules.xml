@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/C343Repository.iml" filepath="$PROJECT_DIR$/.idea/C343Repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C343Assignments/HW2/HW2.iml" filepath="$PROJECT_DIR$/C343Assignments/HW2/HW2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C343Assignments/HW3/HW3.iml" filepath="$PROJECT_DIR$/C343Assignments/HW3/HW3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C343Assignments/HW4/HW4.iml" filepath="$PROJECT_DIR$/C343Assignments/HW4/HW4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C343Assignments/Lab1Th/Lab1Th.iml" filepath="$PROJECT_DIR$/C343Assignments/Lab1Th/Lab1Th.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C343Assignments/Lab3Th/Lab3Th.iml" filepath="$PROJECT_DIR$/C343Assignments/Lab3Th/Lab3Th.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C343Assignments/Lab4F/Lab4F.iml" filepath="$PROJECT_DIR$/C343Assignments/Lab4F/Lab4F.iml" />
+    </modules>
+  </component>
+</project>
