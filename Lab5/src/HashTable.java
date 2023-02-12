@@ -9,7 +9,10 @@ public class HashTable {
     private List<LinkedList<Entry>> entries;
 
     public HashTable() {
-
+        entries = new ArrayList<>(capacity);
+        for(int i = 0; i < capacity;i++) {
+            entries.add(new LinkedList<>());
+        }
     }
 
     public List<LinkedList<Entry>> getEntries() {
@@ -21,16 +24,26 @@ public class HashTable {
     }
 
     private int hash(String key) {
-        return -1;
+        int hash = 0;
+        for(int i = 0; i < key.length(); i++) {
+            hash = hash * 31 + key.charAt(i);
+        }
+        return hash % capacity;
     }
 
 
     public void put(String key, String value) {
+        int hash = hash(key);
+        LinkedList<Entry> bucket = entries.get(index);
+        for(Entry entry : bucket) {
 
+        }
     }
 
     public String get(String key) {
-        return null;
+        int index = hash(key);
+        LinkedList<Entry> bucket = entries.get(index);
+        for()
     }
 
     public void remove(String key) {
