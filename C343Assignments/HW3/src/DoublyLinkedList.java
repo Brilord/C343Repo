@@ -106,7 +106,7 @@ public class DoublyLinkedList<E> {
     // TODO: Search the DoublyLinkedList for elem. If not found, return -1;
     public int search(E elem){
         int index = 0;
-        NodeDL<E> current = had;
+        NodeDL<E> current = head;
         while(current != null){
             if(current.data.equals(elem)) {
                 return index;
@@ -120,7 +120,10 @@ public class DoublyLinkedList<E> {
 
     // TODO: When passed some object, return true if it's a DoublyLinkedList, has the same elements in the same order.
     public boolean equals(Object o){
-        return false;
+        if(o == null || !(o instanceof DoublyLinkedList)) {
+            return false;
+        }
+        
     }
 
     public String toString(){
