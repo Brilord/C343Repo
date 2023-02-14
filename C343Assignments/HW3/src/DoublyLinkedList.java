@@ -123,7 +123,18 @@ public class DoublyLinkedList<E> {
         if(o == null || !(o instanceof DoublyLinkedList)) {
             return false;
         }
-        
+        DoublyLinkedList otherList = (DoublyLinkedList) o;
+        if(this.size() != otherList.size()) {
+            return false;
+        }
+        NodeDL<E> current = this.head;
+        NodeDL<E> other = otherList.head;
+
+        while(current != null) {
+            if(current != other.data) {
+                return false;
+            }
+        }
     }
 
     public String toString(){
