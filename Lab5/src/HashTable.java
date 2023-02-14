@@ -47,10 +47,23 @@ public class HashTable {
     }
 
     public void remove(String key) {
-
+        int index = hash(key);
+        LinkedList<Entry> bucket = entries.get(index);
+        for(Entry entry : bucket) {
+            if(entry.)
+        }
     }
 
     private void rehash() {
+        capacity = capacity * 2 + 1;
+        List<LinkedList<Entry>> newEntries = new ArrayList<>(capacity);
+        for(int i = 0; i < capacity; i++) {
+            newEntries.add(new LinkedList<>());
+        }
+        for(LinkedList<Entry> bucket : entries) {
+            for(Entry entry : bucket) {
 
+            }
+        }
     }
 }

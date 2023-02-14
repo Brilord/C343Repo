@@ -6,7 +6,7 @@ public class Queue<E> {
 
     // TODO: default constructor
     public Queue(){
-
+        q = new DoublyLinkedList<>();
     }
 
     // TODO: Put element at end of queue
@@ -16,7 +16,7 @@ public class Queue<E> {
 
     // TODO: Return the head of the queue; If there's nothing to return then throw EmptyQueueE
     public E dequeue() throws EmptyQueueE {
-        return null;
+        if(q.isEmpty())
     }
 
     // TODO: Without affecting the queue, return the element at the top of the queue
