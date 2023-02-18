@@ -1,4 +1,6 @@
 import java.math.BigInteger;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class HashTable {
@@ -8,7 +10,10 @@ public class HashTable {
     private int capacity = INITIAL_CAPACITY;
 
     public HashTable() {
-        // TODO
+        entries = new ArrayList<>(capacity);
+        for(int i = 0; i < capacity; i++) {
+            entries.add(null);
+        }
     }
 
     public List<Entry> getEntries() {
@@ -28,8 +33,10 @@ public class HashTable {
      *  - the returned hash is ('hash1' + collisions * 'hash2') % capacity
      */
     private int hash(String key, int collisions) {
-        // TODO
-        return -1;
+        int hash1 = key.hashCode();
+        int prevPrime = previousPrime(capacity);
+        int hash2 = prevPrime - (hash1 % prevPrime);
+        return (hash1 + collisions * hash2) % capacity;
     }
 
     /**
@@ -57,7 +64,7 @@ public class HashTable {
      * already stored.
      */
     public void put(String key, String value) {
-        // TODO
+        int i
     }
 
     /**
@@ -65,8 +72,7 @@ public class HashTable {
      * was not found.
      */
     public String get(String key) {
-        // TODO
-        return null;
+        int index =
     }
 
     /**
