@@ -72,7 +72,7 @@ public class HashTable {
      * was not found.
      */
     public String get(String key) {
-        int index =
+
     }
 
     /**
