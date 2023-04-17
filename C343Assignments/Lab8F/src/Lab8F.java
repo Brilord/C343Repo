@@ -8,7 +8,7 @@ public class Lab8F {
      * @param i   index of the first element
      * @param j   index of the second element
      */
-    void swap(int[] arr, int i, int j) {
+    static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -26,7 +26,7 @@ public class Lab8F {
      * @param arr array to be sorted
      * @return the sorted array
      */
-    public int[] insertionSort(int[] arr) {
+    public static int[] insertionSort(int[] arr) {
         int n = arr.length;
         for(int i = 1; i < n; i++) {
             int key = arr[i];
@@ -53,7 +53,7 @@ public class Lab8F {
      * @param low  starting index
      * @param high ending index
      */
-    public void quickSort(int[] arr, int low, int high) {
+    public static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
             quickSort(arr, low, pi - 1);
@@ -74,7 +74,7 @@ public class Lab8F {
      * @param high ending index
      * @return the correct index where you should partition the array
      */
-    public int partition(int[] arr, int low, int high) {
+    public static int partition(int[] arr, int low, int high) {
         int pivot = arr[high];
         int i = low - 1;
         for (int j = low; j < high; j++) {
