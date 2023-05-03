@@ -54,6 +54,9 @@ public class AVL<E extends Comparable<E>> implements Tree<E> {
     // TODO: updateHeight - same as BST
     public void updateHeight() {
 
+        if(this.getLeft() && this.getRight() != null) {
+
+        }
     }
 
     // Traversals that return lists
@@ -84,6 +87,8 @@ public class AVL<E extends Comparable<E>> implements Tree<E> {
      * Make sure you increment the RRotations.
     */
     public void rotateRight(BinaryNode<E> node) {
+        BinaryNode<E> leftChild = node.getLeft();
+
     }
 
     /*
@@ -142,6 +147,7 @@ public class AVL<E extends Comparable<E>> implements Tree<E> {
       * Hint: mkBalanced will be your best friend here.
     */
     public void insert(E elem) {
+
     }
 
 
