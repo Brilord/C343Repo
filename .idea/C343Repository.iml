@@ -12,6 +12,9 @@
       <sourceFolder url="file://$MODULE_DIR$/C343Assignments/HW6/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/C343Assignments/Lab9/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/C343Assignments/Lab9/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/C343Assignments/HW7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/C343Assignments/HW8/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/C343Assignments/HW9/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
