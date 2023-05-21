@@ -26,14 +26,17 @@ public class Lab8F {
      * @param arr array to be sorted
      * @return the sorted array
      */
+
+     // One of the simplist sorting algorithms.
+     // For pass p = 1 through n-1, insertion sort ensures that the elements in position is already known to be in sorted method.
     public static int[] insertionSort(int[] arr) {
         int n = arr.length;
         for(int i = 1; i < n; i++) {
-            int key = arr[i];
-            int j = i -1;
+            int key = arr[i]; // this is the key value to the element
+            int j = i - 1; 
             while(j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j -1;
+                arr[j + 1] = arr[j]; // traverse through the array
+                j = j - 1; 
             }
             arr[j+1] = key;
         }
