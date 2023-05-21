@@ -3,6 +3,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ietf.jgss.GSSContext;
+
 public class HashTable {
     private final int INITIAL_CAPACITY = 11;
     private List<Entry> entries;
@@ -24,6 +26,7 @@ public class HashTable {
         return size;
     }
 
+gs
     /**
      * Generates the hash (index) for the given key and the number of collisions encountered. This should be computed
      * using double hashing; please implement the function according to the following requirements:
@@ -33,9 +36,9 @@ public class HashTable {
      *  - the returned hash is ('hash1' + collisions * 'hash2') % capacity
      */
     private int hash(String key, int collisions) {
-        int hash1 = key.hashCode();
-        int prevPrime = previousPrime(capacity);
-        int hash2 = prevPrime - (hash1 % prevPrime);
+        int hash1 = key.hashCode(); // hash code of the key
+        int prevPrime = previousPrime(capacity); // 
+        int hash2 = prevPrime - (hash1 % prevPrime); // 
         return (hash1 + collisions * hash2) % capacity;
     }
 
@@ -64,16 +67,17 @@ public class HashTable {
      * already stored.
      */
     public void put(String key, String value) {
-        int collision = 0;
-        int index = hash(key, collision);
-        Entry entry = entries.get(index);
+        int hashCode = key.hashCode();
+        int index = hashCode % capacity;
+        Entry entry = new Entry(key, value);
 
-        while(entries != null){
-            if(entries.getKey().equals(key)) {
-                entry.setValue(value);
+        while(entries.get(index) != null) {
+            if(entries.get(index).getKey().equals(key)) {
+                entries.get(index).setValue(value);
                 return;
             }
         }
+
     }
 
     /**
@@ -81,8 +85,19 @@ public class HashTable {
      * was not found.
      */
     public String get(String key) {
-        int hashCode = key.hashCode();
-        int index = hashCode % capacity;
+        int collisions = 0;
+        int index = hash(key, collisions);
+        while(entries.get(index) != null) { // while the hash table index is not null
+            if(entries.get(index).getKey().equals(key)) { // if the hash table key value is equals to the desired value we want to get
+                return entries.get(index).getValue(); // return the value of the index in the hash table.
+            }
+
+            collisions++;
+            index = hash(key, collisions); 
+        }
+
+        return null; // otherwise retuen null
+
     }
 
     /**
@@ -97,8 +112,8 @@ public class HashTable {
      * key-value pairs of the smaller 'entries' into the
      */
     private void rehash() {
-        int newCapacity = nextPrime(capacity * 2);
-        List<Entry> newEntries = new ArrayList<>(newCapacity);
+        int newCapacity = nextPrime(capacity * 2); // add the capacity of the 
+        List<Entry> newEntries = new ArrayList<>(newCapacity); // 
         for(int i = 0; i< newCapacity; i++) {
             newEntries.add(null);
         }
@@ -111,5 +126,10 @@ public class HashTable {
         // https://stackoverflow.com/a/57904191
         BigInteger b = new BigInteger(String.valueOf(number));
         return (int) Long.parseLong(b.nextProbablePrime().toString());
+    }
+
+    public void add(String key, String value) {
+        put(key, value);
+
     }
 }
