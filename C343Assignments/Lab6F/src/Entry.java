@@ -30,6 +30,7 @@ public class Entry {
      */
     public void markTombstone() {
         // TODO
+        this.type = Type.TOMBSTONE;
     }
 
     // Entries can either contain data, or mark that an entry was deleted

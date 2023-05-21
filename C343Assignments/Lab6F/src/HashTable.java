@@ -64,7 +64,16 @@ public class HashTable {
      * already stored.
      */
     public void put(String key, String value) {
-        int i
+        int collision = 0;
+        int index = hash(key, collision);
+        Entry entry = entries.get(index);
+
+        while(entries != null){
+            if(entries.getKey().equals(key)) {
+                entry.setValue(value);
+                return;
+            }
+        }
     }
 
     /**
@@ -72,7 +81,8 @@ public class HashTable {
      * was not found.
      */
     public String get(String key) {
-
+        int hashCode = key.hashCode();
+        int index = hashCode % capacity;
     }
 
     /**
@@ -87,7 +97,11 @@ public class HashTable {
      * key-value pairs of the smaller 'entries' into the
      */
     private void rehash() {
-        // TODO
+        int newCapacity = nextPrime(capacity * 2);
+        List<Entry> newEntries = new ArrayList<>(newCapacity);
+        for(int i = 0; i< newCapacity; i++) {
+            newEntries.add(null);
+        }
     }
 
     /**

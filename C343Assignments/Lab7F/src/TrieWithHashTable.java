@@ -22,7 +22,7 @@ public class TrieWithHashTable {
      * @param word The word to be searched for
      */
     boolean search(String word) {
-        //TODO
+        //TODO what to do
         return false;
     }
 
