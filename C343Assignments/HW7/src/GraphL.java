@@ -18,6 +18,7 @@ public class GraphL implements Graph {
 
     // TODO:
     public GraphL(List<Node>[] nodeArray, List<Node> nodes){
+
     }
 
     // Implement the missing functions here:
