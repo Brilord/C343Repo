@@ -3,7 +3,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ietf.jgss.GSSContext;
+
 
 public class HashTable {
     private final int INITIAL_CAPACITY = 11;
@@ -26,7 +26,6 @@ public class HashTable {
         return size;
     }
 
-gs
     /**
      * Generates the hash (index) for the given key and the number of collisions encountered. This should be computed
      * using double hashing; please implement the function according to the following requirements:
@@ -104,7 +103,17 @@ gs
      * If the key is found in the HashTable, marks the corresponding entry as a deleted (a tombstone).
      */
     public void remove(String key) {
-        // TODO
+        int collisions = 0;
+        int index = hash(key, collisions);
+        while(entries.get(index) != null) {
+            if (entries.get(index).equals(key)) { // if the entries index equals the key
+                entries.set(index, null); // set the eleemnt into null;
+                size--; // decrease the size.
+                return;
+            }
+            collisions++;
+            index = hash(key, collisions);
+        }
     }
 
     /**

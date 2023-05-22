@@ -3,11 +3,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class HashTableTest {
-    private HashTable<String, Integer> hashTable;
+    private HashTable hashTable;
 
     @BeforeEach
     void setUp() {
-        hashTable = new HashTable<>();
+        hashTable = new HashTable();
     }
 
     @Test

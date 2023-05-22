@@ -52,9 +52,11 @@ public class Lab9 {
      * @param arr array to be sorted
      * @param noOfBuckets the number of buckets to be used
      */
-    static void bucketSort(int[] arr, int noOfBuckets)
-    {
-        //TODO
+    static void bucketSort(int[] arr, int noOfBuckets){
+        int min = min(arr);
+        int max = max(arr);
+        double range = (double)(max -min) / noOfBuckets;
+        
     }
 
     /** MAX
@@ -66,7 +68,13 @@ public class Lab9 {
      * @return the maximum element of the array
      */
     public static int max(int[] arr) {
-        //TODO
+        int max = Integer.MIN_VALUE;
+        for(int num : arr) {
+            if(num > max) {
+                max = num;
+            }
+        }
+        return max; 
     }
 
     /** MIN
@@ -78,7 +86,13 @@ public class Lab9 {
      * @return the minimum element of the array
      */
     public static int min(int[] arr) {
-        //TODO
+        int min = Integer.MAX_VALUE;
+        for (int num : arr) {
+            if(num < min) {
+                min = num;
+            }
+        }
+        return min;
     }
 
 }
