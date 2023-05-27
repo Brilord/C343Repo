@@ -6,6 +6,12 @@ public class TrieNodeWHashTable {
 
     public TrieNodeWHashTable() {
         //TODO
+        isWord = false;
+        children = new HashMap<>();
+    }
+
+    public void setWordEnd(boolean b) {
+        
     }
 }
 

@@ -10,11 +10,21 @@ public class TrieWithHashTable {
      * @param word The word to be inserted
      */
     void insert( String word ) {
-        //TODO
+        insertHelper(root, word);
     }
 
     void insertHelper(TrieNodeWHashTable node, String word) {
-        //TODO
+        if(word.isEmpty()) {
+            node.setWordEnd(true);
+            return;
+        }
+        char firstChar = word.charAt(0);
+        TrieNodeWHashTable child = node.getChild(firstChar);
+        if(child == null) {
+            child = new TrieNodeWHashTable();
+            node.addChild(firstChar, child);
+        }
+        insertHelper(child), word.substring(1));
     }
 
     /**
