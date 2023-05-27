@@ -17,14 +17,31 @@ public class MazeSolver {
     to the first line of input. Then it fills the maze with the maze from the file.
      */
     public static void setMaze(String file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        // Read the first line to get the dimensions
+        String dimensions = reader.readLine();
+        String[] dimensionsArr = dimensions.split(" ");
+        m = Integer.parseInt(dimensionsArr[0]);
+        n = Integer.parseInt(dimensionsArr[1]);
+        // Initialize the maze array
+        maze = new char[m][n];
 
+        // Read the maze from the file
+        for (int i = 0; i < m; i++) {
+            String line = reader.readLine();
+            for (int j = 0; j < n; j++) {
+                maze[i][j] = line.charAt(j);
+        }
+    }
+
+    reader.close();
     }
 
     /*
     TODO: isValid - checks if a position on the board has not been visited and is within bounds
      */
     public static boolean isValid(int x, int y) {
-        return false;
+        return x >= 0 && x < m && y >= 0 && y < n && maze[x][y] != '#';
     }
 
 
@@ -47,18 +64,71 @@ public class MazeSolver {
 
     // TODO: Using a queue, solve the maze. Be sure to explain your algorithm for full points.
     public static boolean solveMazeQueue(int x, int y) throws EmptyQueueE{
-        return false;
+        Stack<int[]> stack = new Stack<>();
+    boolean[][] visited = new boolean[m][n];
+
+    // Push the starting position onto the stack
+    stack.push(new int[]{x, y});
+
+    while (!stack.isEmpty()) {
+        int[] currPos = stack.pop();
+        int currX = currPos[0];
+        int currY = currPos[1];
+
+        // If already visited, ignore
+        if (visited[currX][currY])
+            continue;
+
+        // Mark as visited
+        visited[currX][currY] = true;
+
+        // If it's the goal, return true
+        if (maze[currX][currY] == 'G')
+            return true;
+
+        // Explore neighbors and push them onto the stack
+        if (isValid(currX - 1, currY))
+            stack.push(new int[]{currX - 1, currY});
+        if (isValid(currX + 1, currY))
+            stack.push(new int[]{currX + 1, currY});
+        if (isValid(currX, currY - 1))
+            stack.push(new int[]{currX, currY - 1});
+        if (isValid(currX, currY + 1))
+            stack.push(new int[]{currX, currY + 1});
+    }
+
+    return false;
     }
 
     // TODO: Solve the board. Mode 1 = stack solving. Mode 2 = queue solving.
     // 1: stack
     // 2: queue
     public static boolean solve(String file, int mode) throws IOException, EmptyStackE, EmptyQueueE {
-        // find starting point
-        // check if the maze can be solved
-        boolean solved = false;
-        System.out.println("Maze can be solved: " + solved);
-        return false;
+        setMaze(file);
+
+    // Find the starting point (S)
+    int startX = -1;
+    int startY = -1;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (maze[i][j] == 'S') {
+                startX = i;
+                startY = j;
+                break;
+            }
+        }
+    }
+
+    // Check if the maze can be solved based on the chosen mode
+    boolean solved = false;
+    if (mode == 1) {
+        solved = solveMazeStack(startX, startY);
+    } else if (mode == 2) {
+        solved = solveMazeQueue(startX, startY);
+    }
+
+    System.out.println("Maze can be solved: " + solved);
+    return solved;
     }
 
 
