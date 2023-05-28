@@ -31,9 +31,10 @@ public class Stack<E>{
 
     // TODO: Without affecting the stack, return the element at the top of the stack
     public E peek() throws IndexOutOfBoundsException{
-        if(size == 0) {
-            throw new IndexOutOfBoundsException("Stack is empty"); 
+        if (size == 0) {
+            throw new IndexOutOfBoundsException("Stack is empty");
         }
+        return st.get(size);
     }
 
     public int size() {
@@ -42,7 +43,14 @@ public class Stack<E>{
 
     // TODO: Check if some other object is the same Stack
     public boolean equals(Object o){
-        return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Stack<?> otherStack = (Stack<?>) o;
+        return size == otherStack.size && st.equals(otherStack.st);
     }
 
     public String toString(){

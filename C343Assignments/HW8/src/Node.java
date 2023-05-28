@@ -53,4 +53,12 @@ public class Node implements Comparable<Node>{
         return name + " " + value;
     }
 
+    public void removeEdge(Node dest) {
+
+    }
+
+    public void addEdge(Edge edge) {
+        
+    }
+
 }
