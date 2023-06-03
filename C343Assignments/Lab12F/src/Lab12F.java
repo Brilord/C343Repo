@@ -1,5 +1,9 @@
 import java.util.Arrays;
 
+/*
+ * Author: Brian W
+ * Bloomington Indiana
+ */
 public class Lab12F {
 
     /** UNIQUE PATHS BOTTOM UP
@@ -30,7 +34,26 @@ public class Lab12F {
      * @return number of unique paths
      */
     static int numberOfPaths(int n, int m) {
-        //TODO
+        int[][] dp = new int[n][m];
+        // initialize the first row and column with 1
+        // as there is only one way to reach any cell in the first row or column
+        
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = 1;
+        }
+        for(int j = 0; j < m; j++) {
+            dp[0][j] = 1;
+        }
+
+        // fill theremaining cells using botton-up approach.
+        for(int i = 01; i < n; i++) {
+            for(int j = 1; j < m; j++) {
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
+        }
+
+        // return the number of unique paths to the bottom right cell.
+        return dp[n-1][m-1];
     }
 
 
