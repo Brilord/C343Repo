@@ -72,6 +72,18 @@ public class SeamCarver {
         }
 
         //TODO: Use Dynamic Programming to find the vertical seam
+        double[][] distTo = new double[width][height];
+        int[][] edgeTo = new int[width][height];
+        for(int col = 0; col < width; col++) {
+            for(int row = 0; row < height; row++) {
+                distTo[col][row] = Double.POSITIVE_INFINITY;
+            }
+        }
+        for (int col = 0; col < width; col++) {
+            distTo[col][0] = 0;
+        }
+
+
         int[] vSeam = new int[height];
 
 
@@ -79,9 +91,10 @@ public class SeamCarver {
     }
 
     // sequence of indices for horizontal seam
-    public int[] findHorizontalSeam() {
+    public int[] findHorizontalSeam() { 
+        transpose();
         int[] hSeam = new int[width];
-
+        transpose();
         //TODO: Use Dynamic Programming to find the horizontal seam
 
         return hSeam;

@@ -48,13 +48,16 @@ public class HashTable {
     }
 
     public String get(String key) {
-        int index = hash(key);
-        LinkedList<Entry> bucket = entries.get(index);
-        for(Entry entry : bucket) {
-            if(entry.key.equals(key)) {
-                return entry.value;
+        int collisions = 0;
+        int index = hash(key, collisions);
+        while(entries.get(index) != null) {
+            if(((Entry) entries.get(index)).getKey().equals(key)) {
+                return entries.get(index).getValue();
             }
+            collisions++;
+            index = hash(key, collisions);
         }
+        return null;
     }
 
     public void remove(String key) {
