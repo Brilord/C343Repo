@@ -8,7 +8,9 @@ public class TrieNode {
 
     // TODO: initialize the TrieNode's properties
     public TrieNode() {
-
+        children = new HashMap<>();
+        isWord = false;
+        frequency = 0;
     }
 
     public String toString () {

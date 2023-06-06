@@ -146,4 +146,7 @@ public class DoublyLinkedList<E> {
         }
         return ret;
     }
+
+    public void addLast(E elem) {
+    }
 }

@@ -7,9 +7,20 @@ public class HashTableOpenAddressing<K, V> extends Dictionary<K,V>{
     private int previousPrime; //store prev prime so that it is not calculated again and again in double hashing.
     private int mode;
 
+    
     public static int LINEARPROBING = 1;
+    // if collision occurs, the algorithm checks the next slot
+    // in the table and continues checking subsequent slot until the
+    // empty slot is found. The probing sequence in linear,
+    // hence the name.
     public static int QUADRATICPROBING = 2;
+    // Quadratic probing uses the
     public static int DOUBLEHASHING = 3;
+    // Double hashing uses a secondary hash function to calculate 
+    // the interval between probing positions.
+    // When the collision occurs, it calcuates a new probing positions
+    // usng the secondary hash function, allowing foe more varies probing 
+    //sequence. 
     private double loadFactor;
     private Entry<K, V>[] table;
 
@@ -32,7 +43,12 @@ public class HashTableOpenAddressing<K, V> extends Dictionary<K,V>{
     If the mode is DOUBLEHASHING, please calculate the previousPrime and set it.
      */
     public HashTableOpenAddressing(int mode, int capacity, double loadFactor) {
-
+        this.mode = mode;
+        this.capacity = capacity;
+        this.loadFactor = loadFactor;
+        this.size = 0;
+        this.previousPrime = previousPrime(capacity);
+        this.table = (Entry<K, V>[]) new Entry[capacity];
     }
 
     private int previousPrime(int number) {
@@ -48,7 +64,7 @@ public class HashTableOpenAddressing<K, V> extends Dictionary<K,V>{
     // TODO:
     //  second hash should be prevPrime - (key % prevPrime)...shouldn't be negative
     private int hash2(K key) {
-        return 0;
+        return previousPrime - (key.hashCode() % previousPrime);
     }
 
 
@@ -97,7 +113,7 @@ public class HashTableOpenAddressing<K, V> extends Dictionary<K,V>{
     // TODO:
     //  Calculate the absolute hash of the key. Do not overthink this.
     private int hash(K key) {
-        return 0;
+        return abs(key.hashCode()) % capacity;
     }
 
 
@@ -124,6 +140,17 @@ public class HashTableOpenAddressing<K, V> extends Dictionary<K,V>{
     //  Calculate the previousPrime and set up the new table with the old tables'
     //  contents now hashed to the new.
     private void resize() {
+        int newCapacity = nextPrime(capacity * 2);
+        int newPreviousPrime = previousPrime(newCapacity);
+
+        Entry<K, V>[] newTable = (Entry<K, V>[]) new Entry[newCapacity];
+        for(Entry<K,V> entry : table) {
+            if(entry != null && entry.getActive()) {
+                int offset = 0;
+                int index - (hash(entry.getKey()) + offset)
+            }
+        }
+    
     }
 
     @Override
