@@ -33,6 +33,8 @@ public class SearchEngine {
             String[] words = text.split("\\s+"); // splits by whitespace
             for (String word : words) {
                 // HERE
+                Node node = new Node(word, url);
+                nodeTree.insert(node);
             }
         }
         reader.close();

@@ -31,6 +31,36 @@ public class Kruskals {
      */
     public static int[] mst(Graph graph) {
         //TODO
+        int numVertices = graph.getNumVertices();
+        int[] mst = new int[numVertices];
+        List<Edge> edges = graph.getEdges();
+
+        Collections.sort(edges); // Sort edges by weight
+
+        for (int i = 0; i < numVertices; i++) {
+            mst[i] = i; // Initialize each node's parent to itself
+        }
+
+        for (Edge edge : edges) {
+            int u = edge.getU();
+            int v = edge.getV();
+
+            int parentU = findParent(mst, u);
+            int parentV = findParent(mst, v);
+
+            if (parentU != parentV) {
+                mst[parentU] = parentV; // Make u's parent the same as v's parent
+            }
+        }
+
+        return mst;
+
+    }
+    private static int findParent(int[] mst, int node) {
+        if (mst[node] != node) {
+            mst[node] = findParent(mst, mst[node]); // Path compression
+        }
+        return mst[node];
     }
 
     /** CYCLEEXISTS
@@ -49,6 +79,36 @@ public class Kruskals {
      */
     public static boolean cycleExists(int[] mst) {
         //TODO
+        int numVertices = mst.length;
+        boolean[] visited = new boolean[numVertices];
+
+        for (int i = 0; i < numVertices; i++) {
+            if (!visited[i]) {
+                if (cycleExistsUtil(mst, i, visited, -1)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean cycleExistsUtil(int[] mst, int node, boolean[] visited, int parent) {
+        visited[node] = true;
+
+        for (int i = 0; i < mst.length; i++) {
+            if (mst[node] == i) {
+                if (!visited[i]) {
+                    if (cycleExistsUtil(mst, i, visited, node)) {
+                        return true;
+                    }
+                } else if (i != parent) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

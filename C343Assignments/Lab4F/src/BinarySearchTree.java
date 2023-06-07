@@ -23,6 +23,8 @@ public class BinarySearchTree {
      */
     public void insert(int data) {
         /// the data is here
+        root = insert(data, root);
+        size++;
     }
 
 
@@ -33,6 +35,18 @@ public class BinarySearchTree {
      */
     private void insert(int data, BinaryTreeNode curNode) {
         // TODO
+        if (curNode == null) {
+            return new BinaryTreeNode(data);
+        }
+
+        if (data < curNode.getItem()) {
+            curNode.setLeft(insert(data, curNode.getLeft()));
+        } else if (data > curNode.getItem()) {
+            curNode.setRight(insert(data, curNode.getRight()));
+        }
+
+        return curNode;
+
     }
 
     /**
@@ -43,7 +57,12 @@ public class BinarySearchTree {
      */
     public BinaryTreeNode remove(int data) {
         // TODO
-        return null;
+        BinaryTreeNode nodeToRemove = search(data, root);
+        root = remove(data, root);
+        if (nodeToRemove != null) {
+            size--;
+        }
+        return nodeToRemove;
     }
 
 
@@ -56,7 +75,29 @@ public class BinarySearchTree {
      */
     private BinaryTreeNode remove(int data, BinaryTreeNode curNode) {
         // TODO
-        return null;
+        if (curNode == null) {
+            return null;
+        }
+
+        if (data < curNode.getItem()) {
+            curNode.setLeft(remove(data, curNode.getLeft()));
+        } else if (data > curNode.getItem()) {
+            curNode.setRight(remove(data, curNode.getRight()));
+        } else {
+            if (curNode.getLeft() == null && curNode.getRight() == null) {
+                return null;
+            } else if (curNode.getLeft() == null) {
+                return curNode.getRight();
+            } else if (curNode.getRight() == null) {
+                return curNode.getLeft();
+            } else {
+                BinaryTreeNode minNode = findMin(curNode.getRight());
+                curNode.setItem(minNode.getItem());
+                curNode.setRight(remove(minNode.getItem(), curNode.getRight()));
+            }
+        }
+
+        return curNode;
     }
 
     /**
@@ -75,15 +116,7 @@ public class BinarySearchTree {
      * @return A Node containing the given integer or null if one is not found
      */
     public BinaryTreeNode search(int data) {
-        // if the node is null or key is present at the root
-        if(root == null || root.getItem() == data) {
-            return root;
-        }
-        // key is greater than the root key
-        if(root.getItem() < data) {
-            return search(root.getItem(), root.getRight());
-        }
-        return search(root.getItem(), root.getLeft());
+        return search(data, root);
     }
 
     /**
@@ -94,7 +127,15 @@ public class BinarySearchTree {
      */
     private BinaryTreeNode search(int data, BinaryTreeNode curNode) {
         // TODO
-        return null;
+        if (curNode == null || curNode.getItem() == data) {
+            return curNode;
+        }
+
+        if (data < curNode.getItem()) {
+            return search(data, curNode.getLeft());
+        } else {
+            return search(data, curNode.getRight());
+        }
     }
 
     /**
@@ -104,7 +145,7 @@ public class BinarySearchTree {
      */
     public String getPreOrderStr() {
         // TODO
-        return null;
+        return getPreOrderStr(root);
     }
 
     /**
@@ -114,7 +155,24 @@ public class BinarySearchTree {
      */
     private String getPreOrderStr(BinaryTreeNode curNode) {
         // TODO
-        return null;
+        if (curNode == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(curNode.getItem());
+
+        if (curNode.getLeft() != null) {
+            sb.append(", ");
+            sb.append(getPreOrderStr(curNode.getLeft()));
+        }
+
+        if (curNode.getRight() != null) {
+            sb.append(", ");
+            sb.append(getPreOrderStr(curNode.getRight()));
+        }
+
+        return sb.toString();
     }
 
     /**
@@ -124,7 +182,7 @@ public class BinarySearchTree {
      */
     public String getInOrderStr() {
         // TODO
-        return getInOrderStr();
+        return getInOrderStr(root);
     }
 
     /**
@@ -133,10 +191,25 @@ public class BinarySearchTree {
      * @return A String representation of the traversal
      */
     private String getInOrderStr(BinaryTreeNode curNode) {
-        if(curNode == null) {
+        if (curNode == null) {
+            return "";
         }
-        
-        return null;
+
+        StringBuilder sb = new StringBuilder();
+
+        if (curNode.getLeft() != null) {
+            sb.append(getInOrderStr(curNode.getLeft()));
+            sb.append(", ");
+        }
+
+        sb.append(curNode.getItem());
+
+        if (curNode.getRight() != null) {
+            sb.append(", ");
+            sb.append(getInOrderStr(curNode.getRight()));
+        }
+
+        return sb.toString();
     }
 
     /**
@@ -146,7 +219,7 @@ public class BinarySearchTree {
      */
     public String getPostOrderStr() {
         // TODO
-        return null;
+        return getPostOrderStr(root);
     }
 
     /**
@@ -156,6 +229,24 @@ public class BinarySearchTree {
      */
     private String getPostOrderStr(BinaryTreeNode curNode) {
         // TODO
-        return null;
+        if (curNode == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        if (curNode.getLeft() != null) {
+            sb.append(getPostOrderStr(curNode.getLeft()));
+            sb.append(", ");
+        }
+
+        if (curNode.getRight() != null) {
+            sb.append(getPostOrderStr(curNode.getRight()));
+            sb.append(", ");
+        }
+
+        sb.append(curNode.getItem());
+
+        return sb.toString();
     }
 }

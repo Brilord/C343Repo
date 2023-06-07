@@ -29,7 +29,8 @@ public class SearchEngine {
         while((url = reader.readLine()) != null){
             Document doc = Jsoup.connect(url).get();
             String text = doc.body().text().toLowerCase();
-            if(url.equals("https://en.wikipedia.org/wiki/Kamala_Harris"))            System.out.println(text);
+            if(url.equals("https://en.wikipedia.org/wiki/Kamala_Harris"))            
+            System.out.println(text);
 
             // System.out.println(text);
             String[] words = text.split("\\s+"); // splits by whitespace

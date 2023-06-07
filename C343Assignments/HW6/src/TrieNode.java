@@ -13,8 +13,36 @@ public class TrieNode {
         frequency = 0;
     }
 
-    public String toString () {
+    public boolean isWord() {
+        return isWord;
+    }
+
+    public void setWord(boolean isWord) {
+        this.isWord = isWord;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    public String toString() {
         return children.toString();
     }
+
+    public HashMap<Character, TrieNode> getChildren() {
+        return children;
+    }
+
+    public boolean isWord(boolean b) {
+        return isWord;
+    }
+
+    
+
+    
 
 }

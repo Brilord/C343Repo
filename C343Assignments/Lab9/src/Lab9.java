@@ -15,7 +15,11 @@ public class Lab9 {
      * @param arr array to be sorted
      */
     static void radixSort(int[] arr) {
-        //TODO
+        int max = max(arr);
+
+        for (int place = 1; max / place > 0; place *= 10) {
+            radixHelper(arr, place);
+        }
     }
 
     /** RADIX HELPER
@@ -27,7 +31,26 @@ public class Lab9 {
      * @param place the placement of the digit you are on
      */
     static void radixHelper(int[] arr, int place) {
-        //TODO
+        int n = arr.length;
+        int[] count = new int[10];
+        int[] output = new int[n];
+
+        for (int num : arr) {
+            int digit = (num / place) % 10;
+            count[digit]++;
+        }
+
+        for (int i = 1; i < 10; i++) {
+            count[i] += count[i - 1];
+        }
+
+        for (int i = n - 1; i >= 0; i--) {
+            int digit = (arr[i] / place) % 10;
+            output[count[digit] - 1] = arr[i];
+            count[digit]--;
+        }
+
+        System.arraycopy(output, 0, arr, 0, n);
     }
 
     /** BUCKET SORT
@@ -55,7 +78,27 @@ public class Lab9 {
     static void bucketSort(int[] arr, int noOfBuckets){
         int min = min(arr);
         int max = max(arr);
-        double range = (double)(max -min) / noOfBuckets;
+
+        double range = (double) (max - min) / noOfBuckets;
+
+        List<List<Integer>> buckets = new LinkedList<>();
+        for (int i = 0; i < noOfBuckets; i++) {
+            buckets.add(new LinkedList<>());
+        }
+
+        for (int num : arr) {
+            int bucketIndex = (int) ((num - min) / range);
+            buckets.get(bucketIndex).add(num);
+        }
+
+        int index = 0;
+        for (List<Integer> bucket : buckets) {
+            Collections.sort(bucket);
+            for (int num : bucket) {
+                arr[index] = num;
+                index++;
+            }
+        }
         
     }
 
