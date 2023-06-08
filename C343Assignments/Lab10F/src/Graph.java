@@ -1,5 +1,7 @@
 import java.util.*;
 
+import org.w3c.dom.NodeList;
+
 public class Graph {
 
     private List<Node> nodes; // List of all nodes in a graph
@@ -30,9 +32,35 @@ public class Graph {
      * @param w ending node
      * @return Arraylist path from v to w
      */
-    public ArrayList<Node> connected(Node v, Node w)
-    {
-        //TODO
+    public ArrayList<Node> connected(Node v, Node w) {
+        // perform a branch-search to find path from v to w
+        Queue<Node> queue = new LinkedList<>();
+        Set<Node> visited = new HashSet<>();
+        Map<Node, Node> parentMap = new HashMap<>();
+
+        queue.offer(v);
+        visited.add(v);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+
+            if (current == w) {
+                // Path found, retrieve and return it
+                return getPath(current, parentMap);
+            }
+
+            for (Node neighbor : getNeighbors(current)) {
+                if (!visited.contains(neighbor)) {
+                    queue.offer(neighbor);
+                    visited.add(neighbor);
+                    parentMap.put(neighbor, current);
+                }
+            }
+        }
+        // no path found, return the arrayList containing only the starter node.
+        ArrayList<Node> emptyPath = new ArrayList<>();
+        emptyPath.add(v);
+        return emptyPath;
     }
 
 
@@ -50,13 +78,36 @@ public class Graph {
      * the given node.
      *
      * @param node ending node in the path
+     * @param parentMap
      * @return ordered arraylist that is a path from the
      *          origin node to the specified node.
      */
-    ArrayList<Node> getPath(Node node)
+    ArrayList<Node> getPath(Node node, Map<Node, Node> parentMap)
     {
         //TODO
+        ArrayList<Node> path = new ArrayList<>();
+        Node current = node;
+        
+        while(current != null) {
+            path.add(0, current);
+            current = parentMap.get(current);       
+        }
+
+        return path;
     }
 
+    private List<Node> getNeighbors(Node node) {
+        List<Node> neighbors = new ArrayList<>();
 
+        int nodeIndex = nodes.indexOf(node);
+        if (nodeIndex >= 0) {
+            for (int i = 0; i < nodes.size(); i++) {
+                if (adjacencyMatrix[nodeIndex][i]) {
+                    neighbors.add(nodes.get(i));
+                }
+            }
+        }
+
+        return neighbors;
+    }
 }
