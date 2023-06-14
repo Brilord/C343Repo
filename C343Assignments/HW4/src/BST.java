@@ -16,6 +16,9 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
 
     // TODO: BST
     public BST(BinaryNode<E> root){
+        this.root = null;
+        this.height = 0;
+        this.size = 0;
     }
 
     // Access field
@@ -36,45 +39,75 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
 
     // TODO: updateHeight - Update the root height to reflect any changes
     public void updateHeight() {
+        if(root != null) {
+            root.updateHeight();
+        }
     }
 
     // Traversals that return lists
     // TODO: Preorder traversal
     public List<E> preOrderList() {
-        return new ArrayList<>();
+        List<E> result = new ArrayList<>();
+        preOrderTraversal(root, result);
+        return result;
     }
 
     // TODO: Inorder traversal
     public List<E> inOrderList() {
-        return new ArrayList<>();
+        List<E> result = new ArrayList<>();
+        inOrderTraversal(root, result);
+        return result;
     }
 
     // TODO: Postorder traversal
     public List<E> postOrderList() {
-        return new ArrayList<>();
+        List<E> result = new ArrayList<>();
+        postOrderTraversal(root, result);
+        return result;
     }
 
     // Helpers for BST/AVL methods
     // TODO: extractRightMost
     //    This will be called on the left subtree and will get the maximum value.
     public BinaryNode<E> extractRightMost(BinaryNode<E> curNode) {
-        return null;
+        if(curNode == null) {
+            return null;
+        }
+        if(curNode.right() == null) {
+            return curNode;
+        }
+        return extractRightMost(curNode.right());
     }
 
     // AVL & BST Search & insert same
     // TODO: search
     public BinaryNode<E> search(E elem) {
-        return null;
+        return searchNode(root, elem);
+    }
+
+    // helper method to search for a node with a given element
+    private BinaryNode<E> searchNode(BinaryNode<E> node, E elem){
+        if(node == null || node.element().equals(elem)) {
+           return node; 
+        } 
     }
 
     // TODO: insert
     public void insert(E elem) {
-
+        root = insertNode(root, elem);
+        size++;
+        updateHeight();
     }
 
     // TODO: delete
     public BinaryNode<E> delete(E elem) {
-        return null;
+        BinaryNode<E> deleteNode = deleteNode(root, elem);
+        if(deleteNode != null) {
+            size--;
+            updateHeight();
+        }
+
+        return deleteNode;
     }
 
     // Stuff to help you debug if you want

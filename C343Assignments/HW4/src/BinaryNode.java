@@ -18,10 +18,18 @@ public class BinaryNode<E extends Comparable<E>> implements TreePrinter.Printabl
 
     // TODO: Set up the BinaryNode
     public BinaryNode(E data, BinaryNode<E> left, BinaryNode<E> right, BinaryNode<E> parent){
+        this.data = data;
+        this.left = left;
+        this.right = right;
+        this.parent = parent;
+        this.height = calculateHeight();
+        this.size = calculateSize();
     }
 
     // Access fields
-    E data() { return this.data; };
+    E data() { 
+        return this.data; 
+    };
     BinaryNode<E> left() {
         return this.left;
     }
@@ -32,6 +40,29 @@ public class BinaryNode<E extends Comparable<E>> implements TreePrinter.Printabl
         return this.parent;
     }
 
+    // helper method to calculate the height of the node
+    private int calculateHeight() {
+        int leftHeight = (hasLeft()) ? left.height() : 0;
+        int rightHeight = (hasRight()) ? right.height() : 0;
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    // hepler menthod to calculate the size of the node
+    private int calculateSize() {
+        int leftSize = (hasLeft() ? left.size() : 0;
+        int rightSize = (hasRight()) ? right.size() : 0;
+        return leftSize + rightSize + 1;
+    }
+
+    // helper method to update the height of the ndoe
+    private void updateHeight() {
+        this.height = calculateHeight();
+    }
+
+    // helper method to update the size of the node
+    private void updateSize() {
+        this.size = calculateSize();
+    }
     // Setter fields
     void setLeft(BinaryNode<E> left) {
         this.left = left;
