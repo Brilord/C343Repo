@@ -11,7 +11,7 @@ public class SearchEngine {
     private int mode;
     private Tree<Node> nodeTree; // List -> Tree
 
-    // build everything bahahah
+    // build everything
     // TODO: mode 3 = BST mode 4 = AVL
     public SearchEngine(int mode) throws IOException {
         this.mode = mode;

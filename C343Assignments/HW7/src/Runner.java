@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 // This class acts a main function
-public class Runner1 {
+public class Runner {
     public static GraphL setUpGraph(String file) throws IOException{
         try{
             int vertices = 0;

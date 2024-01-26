@@ -87,9 +87,15 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
 
     // helper method to search for a node with a given element
     private BinaryNode<E> searchNode(BinaryNode<E> node, E elem){
-        if(node == null || node.element().equals(elem)) {
-           return node; 
-        } 
+        if (node == null || node.element().equals(elem)) {
+            return node;
+        }
+        int cmp = elem.compareTo(node.element());
+        if (cmp < 0) {
+            return searchNode(node.left(), elem);
+        } else {
+            return searchNode(node.right(), elem);
+        }
     }
 
     // TODO: insert
@@ -97,6 +103,41 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
         root = insertNode(root, elem);
         size++;
         updateHeight();
+    }
+
+    private BinaryNode<E> insertNode(BinaryNode<E> node, E elem) {
+        if (node == null) {
+            return new BinaryNode<>(elem);
+        }
+        int cmp = elem.compareTo(node.element());
+        if (cmp < 0) {
+            node.setLeft(insertNode(node.left(), elem));
+        } else if (cmp > 0) {
+            node.setRight(insertNode(node.right(), elem));
+        }
+        return node;
+    }
+
+    private BinaryNode<E> deleteNode(BinaryNode<E> node, E elem) {
+        if (node == null) {
+            return null;
+        }
+        int cmp = elem.compareTo(node.element());
+        if (cmp < 0) {
+            node.setLeft(deleteNode(node.left(), elem));
+        } else if (cmp > 0) {
+            node.setRight(deleteNode(node.right(), elem));
+        } else {
+            if (node.left() == null) {
+                return node.right();
+            } else if (node.right() == null) {
+                return node.left();
+            }
+            BinaryNode<E> rightMost = extractRightMost(node.left());
+            node.setData(rightMost.element());
+            node.setLeft(deleteNode(node.left(), rightMost.element()));
+        }
+        return node;
     }
 
     // TODO: delete
